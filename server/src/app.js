@@ -4,7 +4,7 @@ import express from "express";
 import morgan from "morgan";
 
 import ENV from "./lib/env.js";
-import userRouter from "./routes/user.route.js";
+import userRouter from "./routes/auth.route.js";
 
 const app = express();
 

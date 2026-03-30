@@ -30,27 +30,19 @@ export const register = async (req, res, next) => {
 			password,
 		});
 
-		const accessToken = jwt.sign(
+		const token = jwt.sign(
 			{
 				id: newUser._id,
 			},
 			ENV.JWT_SECRET,
-			{ expiresIn: "15m" },
+			{ expiresIn: "1d" },
 		);
 
-		const refreshToken = jwt.sign(
-			{
-				id: newUser._id,
-			},
-			ENV.JWT_SECRET,
-			{ expiresIn: "7d" },
-		);
-
-		res.cookie("refreshToken", refreshToken, {
+		res.cookie("token", token, {
 			httpOnly: true,
 			secure: ENV.NODE_ENV === "production",
 			sameSite: "lax",
-			maxAge: 7 * 24 * 60 * 60 * 1000, // 7days
+			maxAge:  24 * 60 * 60 * 1000, // 1day
 		});
 
 		res.status(201).json({
@@ -60,7 +52,6 @@ export const register = async (req, res, next) => {
 				name: newUser.name,
 				email: newUser.email,
 			},
-			accessToken,
 		});
 	} catch (error) {
 		next(error);
@@ -94,27 +85,20 @@ export const login = async (req, res, next) => {
 			});
 		}
 
-		const accessToken = jwt.sign(
+		const token = jwt.sign(
 			{
 				id: user._id,
 			},
 			ENV.JWT_SECRET,
-			{ expiresIn: "15m" },
+			{ expiresIn: "1d" },
 		);
 
-		const refreshToken = jwt.sign(
-			{
-				id: user._id,
-			},
-			ENV.JWT_SECRET,
-			{ expiresIn: "7d" },
-		);
 
-		res.cookie("refreshToken", refreshToken, {
+		res.cookie("token", token, {
 			httpOnly: true,
 			secure: ENV.NODE_ENV === "production",
 			sameSite: "lax",
-			maxAge: 7 * 24 * 60 * 60 * 1000, // 7days
+			maxAge: 24 * 60 * 60 * 1000, // 1day
 		});
 
 		res.status(200).json({
@@ -123,10 +107,9 @@ export const login = async (req, res, next) => {
 				id: user._id,
 				name: user.name,
 				email: user.email,
-				role: user.role,
 			},
-			accessToken,
 		});
+
 	} catch (error) {
 		next(error);
 	}
