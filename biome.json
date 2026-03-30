@@ -1,0 +1,24 @@
+{
+	"linter": {
+		"rules": {
+			"recommended": false,
+			"a11y": {
+				"useButtonType": "off",
+				"useKeyWithClickEvents": "off",
+				"noStaticElementInteractions": "off"
+			},
+			"suspicious": {
+				"noArrayIndexKey": "off",
+				"noUnknownAtRules": "off"
+			}
+		}
+	},
+	"css": {
+		"linter": {
+			"enabled": false
+		},
+		"parser": {
+			"tailwindDirectives": true
+		}
+	}
+}
