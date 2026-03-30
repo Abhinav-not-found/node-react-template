@@ -8,7 +8,6 @@ router.post("/register", userController.register);
 router.post("/login", userController.login);
 router.get("/logout", userController.logout);
 router.get("/get-me", authenticateToken, userController.getMe);
-router.get("/refresh-token", userController.refreshToken);
 
 router.get("/check", (req, res) => {
 	res.send("User route is running");

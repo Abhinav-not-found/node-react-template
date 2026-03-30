@@ -2,3 +2,5 @@ PROJECT.md
 server/node_modules
 server/.env
 server/.env.
+config.bat
+node_modules
